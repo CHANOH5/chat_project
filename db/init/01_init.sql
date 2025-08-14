@@ -56,7 +56,9 @@ CREATE TABLE tb_chatroom (
     id              BIGINT           NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '채팅방 고유 ID',
     name            VARCHAR(30)      NOT NULL COMMENT '채팅방 이름',
     room_type       VARCHAR(20)      NOT NULL DEFAULT 'PRIVATE' COMMENT '채팅방 유형 (PRIVATE, PUBLIC)',
-    created_at      DATETIME(3)      NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '생성일'
+    direct_key      VARCHAR(64)               NULL COMMENT '1:1 채팅 고유 키(유저쌍 식별)',
+    created_at      DATETIME(3)      NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '생성일',
+    CONSTRAINT uk_chatroom_direct_key UNIQUE (direct_key)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='채팅방';
 
 CREATE INDEX idx_chatroom_type ON tb_chatroom (room_type);
@@ -99,6 +101,9 @@ CREATE TABLE tb_chatroom_user (
 -- 한 채팅방에 같은 사용자가 중복 입장 레코드 생기지 않도록
 CREATE UNIQUE INDEX uk_cru_room_user ON tb_chatroom_user (chatroom_id, user_id);
 
+-- 조회 최적화(선택): 유저 기준 참여방 찾기
+CREATE INDEX idx_cru_user ON tb_chatroom_user (user_id);
+
 -- =========================================
 -- 6) 메시지 읽음 상태
 -- =========================================
@@ -115,7 +120,10 @@ CREATE TABLE tb_message_status (
 CREATE INDEX idx_ms_user_read ON tb_message_status (user_id, is_read);
 CREATE INDEX idx_ms_message ON tb_message_status (message_id);
 
--- admin 계정 생성 (비밀번호: 1234, BCrypt 암호화)
+-- =========================================
+-- Seed: admin 계정
+-- (비밀번호: 1234 의 bcrypt)
+-- =========================================
 INSERT INTO tb_user (
     id, password, name, nickname, email, is_anonymous, role, profile_image, status, created_at
 ) VALUES (
@@ -125,7 +133,7 @@ INSERT INTO tb_user (
     '운영자',
     NULL,
     0,   -- 회원가입 여부 (회원=0)
-    0,   -- 권한 (관리자=0, 사용자=1)
+    0,   -- 권한 (관리자=0)
     NULL,
     0,   -- status (활성=0)
     NOW(3)
