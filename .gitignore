@@ -1,0 +1,20 @@
+# Java/Gradle
+backend/.gradle/
+backend/build/
+backend/out/
+**/*.iml
+.idea/
+
+# Node/Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/dist/
+frontend/.vite/
+frontend/build/
+
+# OS/ETC
+.DS_Store
+Thumbs.db
+
+# Docker bind mounts (있다면)
+dbdata/

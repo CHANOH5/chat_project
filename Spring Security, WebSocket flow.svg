@@ -1,0 +1,312 @@
+<svg viewBox="0 0 1600 1400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1600" height="1400" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="800" y="30" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">
+    Spring Boot + Tomcat 통합 시스템 - 요청 타입별 분기 플로우
+  </text>
+  
+  <!-- Tomcat Container (Main Container) -->
+  <rect x="50" y="70" width="1500" height="1280" fill="#fff8e1" stroke="#ff8f00" stroke-width="4" rx="15"/>
+  <text x="800" y="100" text-anchor="middle" font-size="20" font-weight="bold" fill="#ff8f00">
+    🐱 Apache Tomcat Servlet Container (Port: 8080)
+  </text>
+  
+  <!-- Spring Boot Application Context -->
+  <rect x="100" y="130" width="1400" height="1200" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="3" rx="10"/>
+  <text x="800" y="160" text-anchor="middle" font-size="18" font-weight="bold" fill="#7b1fa2">
+    🍃 Spring Boot Application Context
+  </text>
+  
+  <!-- Common Entry Point -->
+  <rect x="150" y="190" width="1300" height="120" fill="#e1f5fe" stroke="#0277bd" stroke-width="2" rx="10"/>
+  <text x="800" y="215" text-anchor="middle" font-size="16" font-weight="bold" fill="#0277bd">
+    📨 모든 요청의 공통 진입점 (Unified Entry Point)
+  </text>
+  
+  <!-- Client -->
+  <rect x="200" y="240" width="100" height="50" fill="#ff5722" rx="5"/>
+  <text x="250" y="260" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Client</text>
+  <text x="250" y="275" text-anchor="middle" font-size="10" fill="white">Browser/App</text>
+  
+  <!-- Tomcat Connector -->
+  <rect x="350" y="240" width="100" height="50" fill="#795548" rx="5"/>
+  <text x="400" y="255" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Tomcat</text>
+  <text x="400" y="268" text-anchor="middle" font-size="9" fill="white">HTTP Connector</text>
+  <text x="400" y="280" text-anchor="middle" font-size="8" fill="white">NIO/NIO2</text>
+  
+  <!-- Thread Pool -->
+  <rect x="500" y="240" width="100" height="50" fill="#607d8b" rx="5"/>
+  <text x="550" y="255" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Thread Pool</text>
+  <text x="550" y="268" text-anchor="middle" font-size="9" fill="white">Worker Threads</text>
+  <text x="550" y="280" text-anchor="middle" font-size="8" fill="white">Max: 200</text>
+  
+  <!-- Request/Response Objects -->
+  <rect x="650" y="240" width="100" height="50" fill="#9c27b0" rx="5"/>
+  <text x="700" y="250" text-anchor="middle" font-size="10" font-weight="bold" fill="white">HttpServlet</text>
+  <text x="700" y="263" text-anchor="middle" font-size="9" fill="white">Request/Response</text>
+  <text x="700" y="276" text-anchor="middle" font-size="8" fill="white">Objects</text>
+  
+  <!-- Protocol Detection -->
+  <rect x="800" y="240" width="100" height="50" fill="#3f51b5" rx="5"/>
+  <text x="850" y="250" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Protocol</text>
+  <text x="850" y="263" text-anchor="middle" font-size="9" fill="white">Detection</text>
+  <text x="850" y="276" text-anchor="middle" font-size="8" fill="white">HTTP/WS</text>
+  
+  <!-- Common Flow Arrows -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+    <marker id="red-arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e53935"/>
+    </marker>
+    <marker id="blue-arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1976d2"/>
+    </marker>
+  </defs>
+  
+  <path d="M 300 265 L 350 265" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 450 265 L 500 265" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 600 265 L 650 265" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 750 265 L 800 265" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Decision Point -->
+  <polygon points="1000,240 1100,265 1000,290 900,265" fill="#ff9800" stroke="#f57c00" stroke-width="2"/>
+  <text x="1000" y="260" text-anchor="middle" font-size="11" font-weight="bold" fill="white">요청 타입</text>
+  <text x="1000" y="275" text-anchor="middle" font-size="9" fill="white">분기점</text>
+  
+  <path d="M 900 265 L 900 265" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Branch 1: HTTP REST API (Login/Auth) -->
+  <rect x="150" y="350" width="650" height="300" fill="#ffebee" stroke="#c62828" stroke-width="2" rx="10"/>
+  <text x="475" y="380" text-anchor="middle" font-size="16" font-weight="bold" fill="#c62828">
+    🔐 Branch 1: HTTP REST API (로그인/인증)
+  </text>
+  
+  <!-- HTTP Flow -->
+  <rect x="180" y="410" width="80" height="50" fill="#9c27b0" rx="5"/>
+  <text x="220" y="425" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Dispatcher</text>
+  <text x="220" y="438" text-anchor="middle" font-size="9" fill="white">Servlet</text>
+  <text x="220" y="451" text-anchor="middle" font-size="8" fill="white">Spring MVC</text>
+  
+  <!-- Spring Security Filter Chain (공통) -->
+  <rect x="290" y="410" width="80" height="50" fill="#e53935" rx="5"/>
+  <text x="330" y="425" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Security</text>
+  <text x="330" y="438" text-anchor="middle" font-size="9" fill="white">Filter Chain</text>
+  <text x="330" y="451" text-anchor="middle" font-size="8" fill="white">JWT검증</text>
+  
+  <rect x="400" y="410" width="80" height="50" fill="#ff9800" rx="5"/>
+  <text x="440" y="425" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Auth</text>
+  <text x="440" y="438" text-anchor="middle" font-size="9" fill="white">Controller</text>
+  <text x="440" y="451" text-anchor="middle" font-size="8" fill="white">@RestController</text>
+  
+  <rect x="510" y="410" width="80" height="50" fill="#2196f3" rx="5"/>
+  <text x="550" y="425" text-anchor="middle" font-size="10" font-weight="bold" fill="white">JWT</text>
+  <text x="550" y="438" text-anchor="middle" font-size="9" fill="white">Service</text>
+  <text x="550" y="451" text-anchor="middle" font-size="8" fill="white">토큰생성</text>
+  
+  <rect x="620" y="410" width="80" height="50" fill="#4caf50" rx="5"/>
+  <text x="660" y="425" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Database</text>
+  <text x="660" y="438" text-anchor="middle" font-size="9" fill="white">User Info</text>
+  <text x="660" y="451" text-anchor="middle" font-size="8" fill="white">Authentication</text>
+  
+  <!-- HTTP Flow Arrows -->
+  <path d="M 260 435 L 290 435" stroke="#c62828" stroke-width="2" marker-end="url(#red-arrow)"/>
+  <path d="M 370 435 L 400 435" stroke="#c62828" stroke-width="2" marker-end="url(#red-arrow)"/>
+  <path d="M 480 435 L 510 435" stroke="#c62828" stroke-width="2" marker-end="url(#red-arrow)"/>
+  <path d="M 590 435 L 620 435" stroke="#c62828" stroke-width="2" marker-end="url(#red-arrow)"/>
+  
+  <!-- Decision to HTTP Branch -->
+  <path d="M 950 240 L 475 350" stroke="#c62828" stroke-width="3" marker-end="url(#red-arrow)" stroke-dasharray="5,5"/>
+  <text x="700" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">
+    HTTP Request (POST /api/auth/login)
+  </text>
+  
+  <!-- HTTP Process Steps -->
+  <text x="180" y="490" font-size="11" fill="#333">
+    <tspan x="180" dy="0">HTTP 요청 처리 과정:</tspan>
+    <tspan x="180" dy="15">1. DispatcherServlet이 요청 수신</tspan>
+    <tspan x="180" dy="15">2. Security Filter Chain 통과</tspan>
+    <tspan x="180" dy="15">3. @RestController로 라우팅</tspan>
+    <tspan x="180" dy="15">4. 사용자 인증 및 JWT 토큰 발급</tspan>
+    <tspan x="180" dy="15">5. HTTP Response로 토큰 반환</tspan>
+    <tspan x="180" dy="15">6. 클라이언트가 토큰을 저장</tspan>
+  </text>
+  
+  <!-- Branch 2: WebSocket Connection -->
+  <rect x="850" y="350" width="650" height="300" fill="#e8f5e8" stroke="#2e7d32" stroke-width="2" rx="10"/>
+  <text x="1175" y="380" text-anchor="middle" font-size="16" font-weight="bold" fill="#2e7d32">
+    🔗 Branch 2: WebSocket Connection (실시간 연결)
+  </text>
+  
+  <!-- WebSocket Upgrade Flow -->
+  <rect x="880" y="410" width="80" height="50" fill="#673ab7" rx="5"/>
+  <text x="920" y="422" text-anchor="middle" font-size="9" font-weight="bold" fill="white">WebSocket</text>
+  <text x="920" y="435" text-anchor="middle" font-size="8" fill="white">Servlet</text>
+  <text x="920" y="448" text-anchor="middle" font-size="8" fill="white">Upgrade</text>
+  <text x="920" y="459" text-anchor="middle" font-size="7" fill="white">HTTP→WS</text>
+  
+  <rect x="990" y="410" width="80" height="50" fill="#e53935" rx="5"/>
+  <text x="1030" y="425" text-anchor="middle" font-size="10" font-weight="bold" fill="white">JWT</text>
+  <text x="1030" y="438" text-anchor="middle" font-size="9" fill="white">Handshake</text>
+  <text x="1030" y="451" text-anchor="middle" font-size="8" fill="white">Interceptor</text>
+  
+  <rect x="1100" y="410" width="80" height="50" fill="#2196f3" rx="5"/>
+  <text x="1140" y="425" text-anchor="middle" font-size="10" font-weight="bold" fill="white">STOMP</text>
+  <text x="1140" y="438" text-anchor="middle" font-size="9" fill="white">Handler</text>
+  <text x="1140" y="451" text-anchor="middle" font-size="8" fill="white">Protocol</text>
+  
+  <rect x="1210" y="410" width="80" height="50" fill="#ff9800" rx="5"/>
+  <text x="1250" y="425" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Session</text>
+  <text x="1250" y="438" text-anchor="middle" font-size="9" fill="white">Manager</text>
+  <text x="1250" y="451" text-anchor="middle" font-size="8" fill="white">WebSocket</text>
+  
+  <rect x="1320" y="410" width="80" height="50" fill="#4caf50" rx="5"/>
+  <text x="1360" y="425" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Redis</text>
+  <text x="1360" y="438" text-anchor="middle" font-size="9" fill="white">Session</text>
+  <text x="1360" y="451" text-anchor="middle" font-size="8" fill="white">Store</text>
+  
+  <!-- WebSocket Flow Arrows -->
+  <path d="M 960 435 L 990 435" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 1070 435 L 1100 435" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 1180 435 L 1210 435" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 1290 435 L 1320 435" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Decision to WebSocket Branch -->
+  <path d="M 1050 240 L 1175 350" stroke="#2e7d32" stroke-width="3" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+  <text x="1100" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">
+    WebSocket Upgrade (JWT in Header)
+  </text>
+  
+  <!-- WebSocket Process Steps -->
+  <text x="880" y="490" font-size="11" fill="#333">
+    <tspan x="880" dy="0">WebSocket 연결 과정:</tspan>
+    <tspan x="880" dy="15">1. HTTP Upgrade 요청 (JWT 포함)</tspan>
+    <tspan x="880" dy="15">2. Handshake Interceptor에서 JWT 검증</tspan>
+    <tspan x="880" dy="15">3. STOMP 프로토콜 활성화</tspan>
+    <tspan x="880" dy="15">4. WebSocket Session 생성</tspan>
+    <tspan x="880" dy="15">5. Redis에 세션 정보 저장</tspan>
+    <tspan x="880" dy="15">6. 채팅방 구독 처리</tspan>
+  </text>
+  
+  <!-- Unified Message Processing -->
+  <rect x="150" y="700" width="1300" height="280" fill="#f1f8e9" stroke="#388e3c" stroke-width="2" rx="10"/>
+  <text x="800" y="730" text-anchor="middle" font-size="16" font-weight="bold" fill="#388e3c">
+    💬 통합 메시지 처리 시스템 (WebSocket 연결 후 공통 플로우)
+  </text>
+  
+  <!-- Message Flow Components -->
+  <rect x="200" y="760" width="80" height="60" fill="#ff5722" rx="5"/>
+  <text x="240" y="775" text-anchor="middle" font-size="10" font-weight="bold" fill="white">발신자</text>
+  <text x="240" y="788" text-anchor="middle" font-size="9" fill="white">STOMP</text>
+  <text x="240" y="801" text-anchor="middle" font-size="8" fill="white">SEND</text>
+  <text x="240" y="813" text-anchor="middle" font-size="8" fill="white">/app/chat</text>
+  
+  <rect x="320" y="760" width="80" height="60" fill="#673ab7" rx="5"/>
+  <text x="360" y="775" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Message</text>
+  <text x="360" y="788" text-anchor="middle" font-size="9" fill="white">Controller</text>
+  <text x="360" y="801" text-anchor="middle" font-size="8" fill="white">@Message</text>
+  <text x="360" y="813" text-anchor="middle" font-size="8" fill="white">Mapping</text>
+  
+  <rect x="440" y="760" width="80" height="60" fill="#2196f3" rx="5"/>
+  <text x="480" y="775" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Chat</text>
+  <text x="480" y="788" text-anchor="middle" font-size="9" fill="white">Service</text>
+  <text x="480" y="801" text-anchor="middle" font-size="8" fill="white">비즈니스</text>
+  <text x="480" y="813" text-anchor="middle" font-size="8" fill="white">로직</text>
+  
+  <rect x="560" y="760" width="80" height="60" fill="#4caf50" rx="5"/>
+  <text x="600" y="775" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Database</text>
+  <text x="600" y="788" text-anchor="middle" font-size="9" fill="white">Message</text>
+  <text x="600" y="801" text-anchor="middle" font-size="8" fill="white">Save</text>
+  <text x="600" y="813" text-anchor="middle" font-size="8" fill="white">영속성</text>
+  
+  <rect x="680" y="760" width="80" height="60" fill="#ff9800" rx="5"/>
+  <text x="720" y="770" text-anchor="middle" font-size="9" font-weight="bold" fill="white">Redis</text>
+  <text x="720" y="783" text-anchor="middle" font-size="8" fill="white">Pub/Sub</text>
+  <text x="720" y="796" text-anchor="middle" font-size="8" fill="white">Message</text>
+  <text x="720" y="809" text-anchor="middle" font-size="7" fill="white">클러스터전파</text>
+  
+  <rect x="800" y="760" width="80" height="60" fill="#9c27b0" rx="5"/>
+  <text x="840" y="775" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Message</text>
+  <text x="840" y="788" text-anchor="middle" font-size="9" fill="white">Listener</text>
+  <text x="840" y="801" text-anchor="middle" font-size="8" fill="white">Subscriber</text>
+  <text x="840" y="813" text-anchor="middle" font-size="8" fill="white">@Redis</text>
+  
+  <rect x="920" y="760" width="80" height="60" fill="#607d8b" rx="5"/>
+  <text x="960" y="770" text-anchor="middle" font-size="9" font-weight="bold" fill="white">STOMP</text>
+  <text x="960" y="783" text-anchor="middle" font-size="8" fill="white">Template</text>
+  <text x="960" y="796" text-anchor="middle" font-size="8" fill="white">Broadcast</text>
+  <text x="960" y="809" text-anchor="middle" font-size="7" fill="white">/topic/room</text>
+  
+  <rect x="1040" y="760" width="80" height="60" fill="#ff5722" rx="5"/>
+  <text x="1080" y="775" text-anchor="middle" font-size="10" font-weight="bold" fill="white">수신자들</text>
+  <text x="1080" y="788" text-anchor="middle" font-size="9" fill="white">WebSocket</text>
+  <text x="1080" y="801" text-anchor="middle" font-size="8" fill="white">Sessions</text>
+  <text x="1080" y="813" text-anchor="middle" font-size="8" fill="white">실시간수신</text>
+  
+  <!-- Message Flow Arrows -->
+  <path d="M 280 790 L 320 790" stroke="#388e3c" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 400 790 L 440 790" stroke="#388e3c" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 520 790 L 560 790" stroke="#388e3c" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 640 790 L 680 790" stroke="#388e3c" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 760 790 L 800 790" stroke="#388e3c" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 880 790 L 920 790" stroke="#388e3c" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 1000 790 L 1040 790" stroke="#388e3c" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Read ACK Flow -->
+  <rect x="1160" y="760" width="80" height="60" fill="#795548" rx="5"/>
+  <text x="1200" y="775" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Read ACK</text>
+  <text x="1200" y="788" text-anchor="middle" font-size="9" fill="white">Controller</text>
+  <text x="1200" y="801" text-anchor="middle" font-size="8" fill="white">읽음확인</text>
+  <text x="1200" y="813" text-anchor="middle" font-size="8" fill="white">처리</text>
+  
+  <path d="M 1120 790 L 1160 790" stroke="#388e3c" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Message Processing Steps -->
+  <text x="200" y="850" font-size="11" fill="#333">
+    <tspan x="200" dy="0">통합 메시지 처리 플로우:</tspan>
+    <tspan x="200" dy="15">1. STOMP SEND로 메시지 전송 (/app/chat/send)</tspan>
+    <tspan x="200" dy="15">2. @MessageMapping 어노테이션으로 라우팅</tspan>
+    <tspan x="200" dy="15">3. ChatService에서 비즈니스 로직 처리</tspan>
+    <tspan x="200" dy="15">4. Database에 메시지 영속화</tspan>
+  </text>
+  
+  <text x="700" y="850" font-size="11" fill="#333">
+    <tspan x="700" dy="15">5. Redis Pub/Sub으로 다중 서버 인스턴스에 전파</tspan>
+    <tspan x="700" dy="15">6. MessageListener가 Redis 메시지 구독</tspan>
+    <tspan x="700" dy="15">7. SimpMessagingTemplate으로 브로드캐스트</tspan>
+    <tspan x="700" dy="15">8. 모든 WebSocket 세션에 실시간 전송</tspan>
+  </text>
+  
+  <!-- System Architecture Summary -->
+  <rect x="150" y="1020" width="1300" height="200" fill="#fafafa" stroke="#666" stroke-width="2" rx="10"/>
+  <text x="800" y="1050" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">
+    🏗️ 통합 시스템 아키텍처 요약
+  </text>
+  
+  <text x="200" y="1080" font-size="12" fill="#333" font-weight="bold">핵심 통합 포인트:</text>
+  <text x="200" y="1100" font-size="11" fill="#333">
+    <tspan x="200" dy="0">• 하나의 Tomcat Container에서 HTTP와 WebSocket 모두 처리</tspan>
+    <tspan x="200" dy="15">• Spring Security Filter Chain이 두 프로토콜 모두에 적용</tspan>
+    <tspan x="200" dy="15">• 동일한 JWT 토큰으로 REST API와 WebSocket 인증</tspan>
+    <tspan x="200" dy="15">• Redis를 통한 세션 공유로 다중 서버 인스턴스 지원</tspan>
+    <tspan x="200" dy="15">• 통합된 Database Schema로 사용자/메시지/읽음상태 관리</tspan>
+  </text>
+  
+  <text x="800" y="1080" font-size="12" fill="#333" font-weight="bold">요청 처리 분기:</text>
+  <text x="800" y="1100" font-size="11" fill="#333">
+    <tspan x="800" dy="0">• HTTP 요청 → DispatcherServlet → @RestController</tspan>
+    <tspan x="800" dy="15">• WebSocket Upgrade → WebSocket Container → STOMP Handler</tspan>
+    <tspan x="800" dy="15">• 메시지 전송 → @MessageMapping → Chat Service</tspan>
+    <tspan x="800" dy="15">• 모든 경로에서 동일한 보안 정책과 비즈니스 로직 적용</tspan>
+  </text>
+  
+  <!-- Tech Stack -->
+  <rect x="200" y="1160" width="1200" height="50" fill="#e8eaf6" stroke="#3f51b5" stroke-width="1" rx="5"/>
+  <text x="800" y="1180" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">기술 스택</text>
+  <text x="220" y="1200" font-size="10" fill="#333">
+    <tspan x="220" dy="0">Tomcat 9.x/10.x • Spring Boot 2.x/3.x • Spring Security • Spring WebSocket • STOMP • Redis Pub/Sub • JPA/MyBatis • MySQL/PostgreSQL</tspan>
+  </text>
+</svg>

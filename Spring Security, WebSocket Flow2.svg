@@ -1,0 +1,323 @@
+<svg viewBox="0 0 1600 1700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1600" height="1700" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="800" y="30" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">
+    Spring Boot + Tomcat 통합 시스템 - Security 컴포넌트 동작 플로우
+  </text>
+  
+  <!-- Tomcat Container (Main Container) -->
+  <rect x="50" y="70" width="1500" height="1580" fill="#fff8e1" stroke="#ff8f00" stroke-width="4" rx="15"/>
+  <text x="800" y="100" text-anchor="middle" font-size="20" font-weight="bold" fill="#ff8f00">
+    🐱 Apache Tomcat Servlet Container (Port: 8080)
+  </text>
+  
+  <!-- Spring Boot Application Context -->
+  <rect x="100" y="130" width="1400" height="1500" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="3" rx="10"/>
+  <text x="800" y="160" text-anchor="middle" font-size="18" font-weight="bold" fill="#7b1fa2">
+    🍃 Spring Boot Application Context
+  </text>
+  
+  <!-- Common Entry Point -->
+  <rect x="150" y="190" width="1300" height="120" fill="#e1f5fe" stroke="#0277bd" stroke-width="2" rx="10"/>
+  <text x="800" y="220" text-anchor="middle" font-size="16" font-weight="bold" fill="#0277bd">
+    📨 모든 요청의 공통 진입점 (Unified Entry Point)
+  </text>
+  
+  <!-- Client -->
+  <rect x="200" y="240" width="80" height="50" fill="#ff5722" rx="5"/>
+  <text x="240" y="260" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Client</text>
+  <text x="240" y="275" text-anchor="middle" font-size="9" fill="white">Browser</text>
+  
+  <!-- Tomcat Connector -->
+  <rect x="320" y="240" width="80" height="50" fill="#795548" rx="5"/>
+  <text x="360" y="255" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Tomcat</text>
+  <text x="360" y="270" text-anchor="middle" font-size="8" fill="white">Connector</text>
+  <text x="360" y="283" text-anchor="middle" font-size="8" fill="white">NIO</text>
+  
+  <!-- Thread Pool -->
+  <rect x="440" y="240" width="80" height="50" fill="#607d8b" rx="5"/>
+  <text x="480" y="255" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Thread</text>
+  <text x="480" y="270" text-anchor="middle" font-size="9" fill="white">Pool</text>
+  <text x="480" y="283" text-anchor="middle" font-size="8" fill="white">Max:200</text>
+  
+  <!-- Request Objects -->
+  <rect x="560" y="240" width="80" height="50" fill="#9c27b0" rx="5"/>
+  <text x="600" y="255" text-anchor="middle" font-size="9" font-weight="bold" fill="white">HttpServlet</text>
+  <text x="600" y="270" text-anchor="middle" font-size="8" fill="white">Request/</text>
+  <text x="600" y="283" text-anchor="middle" font-size="8" fill="white">Response</text>
+  
+  <!-- Protocol Detection -->
+  <rect x="680" y="240" width="80" height="50" fill="#3f51b5" rx="5"/>
+  <text x="720" y="255" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Protocol</text>
+  <text x="720" y="270" text-anchor="middle" font-size="9" fill="white">Detection</text>
+  <text x="720" y="283" text-anchor="middle" font-size="8" fill="white">HTTP/WS</text>
+  
+  <!-- Decision Point -->
+  <polygon points="850,240 950,265 850,290 750,265" fill="#ff9800" stroke="#f57c00" stroke-width="2"/>
+  <text x="850" y="260" text-anchor="middle" font-size="11" font-weight="bold" fill="white">요청 타입</text>
+  <text x="850" y="275" text-anchor="middle" font-size="9" fill="white">분기점</text>
+  
+  <!-- Common Flow Arrows -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+    <marker id="red-arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e53935"/>
+    </marker>
+    <marker id="blue-arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1976d2"/>
+    </marker>
+    <marker id="green-arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2e7d32"/>
+    </marker>
+  </defs>
+  
+  <path d="M 280 265 L 320 265" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 400 265 L 440 265" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 520 265 L 560 265" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 640 265 L 680 265" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 760 265 L 750 265" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Branch 1: HTTP REST API with Security Flow -->
+  <rect x="150" y="350" width="650" height="450" fill="#ffebee" stroke="#c62828" stroke-width="2" rx="10"/>
+  <text x="475" y="380" text-anchor="middle" font-size="16" font-weight="bold" fill="#c62828">
+    🔐 Branch 1: HTTP REST API - Security Filter Chain 동작
+  </text>
+  
+  <!-- SecurityConfig initialization (startup time) -->
+  <rect x="180" y="400" width="590" height="40" fill="#ffc107" stroke="#f57c00" stroke-width="1" rx="5"/>
+  <text x="475" y="415" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">
+    ⚙️ SecurityConfig.securityFilterChain() - 애플리케이션 시작시 필터체인 설정
+  </text>
+  <text x="475" y="432" text-anchor="middle" font-size="9" fill="#333">
+    JWT 필터, CORS 설정, 인증/인가 규칙 등록
+  </text>
+  
+  <!-- HTTP Request Flow with Security Components -->
+  <rect x="180" y="460" width="90" height="60" fill="#9c27b0" rx="5"/>
+  <text x="225" y="475" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Dispatcher</text>
+  <text x="225" y="490" text-anchor="middle" font-size="9" fill="white">Servlet</text>
+  <text x="225" y="505" text-anchor="middle" font-size="8" fill="white">요청수신</text>
+  
+  <!-- JwtAuthenticationFilter -->
+  <rect x="300" y="460" width="90" height="60" fill="#e53935" rx="5"/>
+  <text x="345" y="475" text-anchor="middle" font-size="9" font-weight="bold" fill="white">JwtAuthentication</text>
+  <text x="345" y="490" text-anchor="middle" font-size="8" fill="white">Filter</text>
+  <text x="345" y="505" text-anchor="middle" font-size="8" fill="white">토큰추출/검증</text>
+  
+  <!-- JwtUtil -->
+  <rect x="420" y="460" width="90" height="60" fill="#2196f3" rx="5"/>
+  <text x="465" y="475" text-anchor="middle" font-size="10" font-weight="bold" fill="white">JwtUtil</text>
+  <text x="465" y="490" text-anchor="middle" font-size="8" fill="white">validateToken()</text>
+  <text x="465" y="505" text-anchor="middle" font-size="8" fill="white">extractClaims()</text>
+  
+  <!-- UserDetailsService -->
+  <rect x="540" y="460" width="90" height="60" fill="#ff9800" rx="5"/>
+  <text x="585" y="470" text-anchor="middle" font-size="9" font-weight="bold" fill="white">UserDetails</text>
+  <text x="585" y="485" text-anchor="middle" font-size="8" fill="white">Service</text>
+  <text x="585" y="500" text-anchor="middle" font-size="8" fill="white">loadUserByUsername()</text>
+  <text x="585" y="513" text-anchor="middle" font-size="7" fill="white">UserPrincipal 생성</text>
+  
+  <!-- UserPrincipal -->
+  <rect x="660" y="460" width="90" height="60" fill="#4caf50" rx="5"/>
+  <text x="705" y="475" text-anchor="middle" font-size="10" font-weight="bold" fill="white">UserPrincipal</text>
+  <text x="705" y="485" text-anchor="middle" font-size="8" fill="white">implements</text>
+  <text x="705" y="498" text-anchor="middle" font-size="8" fill="white">UserDetails</text>
+  <text x="705" y="511" text-anchor="middle" font-size="7" fill="white">인증객체생성</text>
+  
+  <!-- Security Flow Arrows -->
+  <path d="M 270 490 L 300 490" stroke="#c62828" stroke-width="2" marker-end="url(#red-arrow)"/>
+  <path d="M 390 490 L 420 490" stroke="#c62828" stroke-width="2" marker-end="url(#red-arrow)"/>
+  <path d="M 510 490 L 540 490" stroke="#c62828" stroke-width="2" marker-end="url(#red-arrow)"/>
+  <path d="M 630 490 L 660 490" stroke="#c62828" stroke-width="2" marker-end="url(#red-arrow)"/>
+  
+  <!-- SecurityContext Setting -->
+  <rect x="180" y="540" width="190" height="50" fill="#795548" rx="5"/>
+  <text x="275" y="560" text-anchor="middle" font-size="11" font-weight="bold" fill="white">SecurityContextHolder</text>
+  <text x="275" y="575" text-anchor="middle" font-size="9" fill="white">setAuthentication(userPrincipal)</text>
+  
+  <!-- Controller -->
+  <rect x="400" y="540" width="90" height="50" fill="#673ab7" rx="5"/>
+  <text x="445" y="560" text-anchor="middle" font-size="10" font-weight="bold" fill="white">@RestController</text>
+  <text x="445" y="575" text-anchor="middle" font-size="8" fill="white">인증완료후실행</text>
+  
+  <!-- Database -->
+  <rect x="520" y="540" width="90" height="50" fill="#009688" rx="5"/>
+  <text x="565" y="560" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Database</text>
+  <text x="565" y="575" text-anchor="middle" font-size="8" fill="white">비즈니스로직</text>
+  
+  <!-- Security Context Flow -->
+  <path d="M 705 520 L 275 540" stroke="#795548" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="3,3"/>
+  <path d="M 370 565 L 400 565" stroke="#673ab7" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 490 565 L 520 565" stroke="#009688" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Decision to HTTP Branch -->
+  <path d="M 800 240 L 475 350" stroke="#c62828" stroke-width="3" marker-end="url(#red-arrow)" stroke-dasharray="5,5"/>
+  <text x="630" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">
+    HTTP Request (JWT in Header)
+  </text>
+  
+  <!-- HTTP Security Process Steps -->
+  <text x="180" y="620" font-size="11" fill="#333">
+    <tspan x="180" dy="0">HTTP Security 처리 상세 플로우:</tspan>
+    <tspan x="180" dy="18">1. DispatcherServlet이 모든 HTTP 요청을 받음</tspan>
+    <tspan x="180" dy="18">2. SecurityConfig에서 설정한 FilterChain이 자동 실행</tspan>
+    <tspan x="180" dy="18">3. JwtAuthenticationFilter.doFilterInternal() 실행</tspan>
+    <tspan x="180" dy="18">   → Authorization 헤더에서 "Bearer " 토큰 추출</tspan>
+    <tspan x="180" dy="18">4. JwtUtil.validateToken(token) 호출하여 토큰 유효성 검증</tspan>
+    <tspan x="180" dy="18">5. 유효한 토큰이면 JwtUtil.extractClaims()로 사용자 정보 추출</tspan>
+    <tspan x="180" dy="18">6. UserDetailsService.loadUserByUsername()으로 UserPrincipal 객체 생성</tspan>
+    <tspan x="180" dy="18">7. SecurityContextHolder에 Authentication 객체 저장 (인증 완료)</tspan>
+    <tspan x="180" dy="18">8. @RestController 메서드 실행 (인증된 사용자로)</tspan>
+  </text>
+  
+  <!-- Branch 2: WebSocket Connection with Security Flow -->
+  <rect x="850" y="350" width="650" height="450" fill="#e8f5e8" stroke="#2e7d32" stroke-width="2" rx="10"/>
+  <text x="1175" y="380" text-anchor="middle" font-size="16" font-weight="bold" fill="#2e7d32">
+    🔗 Branch 2: WebSocket - Handshake Security 동작
+  </text>
+  
+  <!-- WebSocket Security Config -->
+  <rect x="880" y="400" width="590" height="40" fill="#ffc107" stroke="#f57c00" stroke-width="1" rx="5"/>
+  <text x="1175" y="415" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">
+    ⚙️ WebSocketConfig.registerStompEndpoints() - STOMP 엔드포인트와 인터셉터 등록
+  </text>
+  <text x="1175" y="432" text-anchor="middle" font-size="9" fill="#333">
+    Handshake Interceptor에서 JWT 검증 로직 설정
+  </text>
+  
+  <!-- WebSocket Upgrade Flow with Security -->
+  <rect x="880" y="460" width="90" height="60" fill="#673ab7" rx="5"/>
+  <text x="925" y="470" text-anchor="middle" font-size="9" font-weight="bold" fill="white">WebSocket</text>
+  <text x="925" y="485" text-anchor="middle" font-size="8" fill="white">Servlet</text>
+  <text x="925" y="500" text-anchor="middle" font-size="8" fill="white">Upgrade</text>
+  <text x="925" y="513" text-anchor="middle" font-size="7" fill="white">HTTP→WS</text>
+  
+  <!-- Handshake Interceptor -->
+  <rect x="1000" y="460" width="90" height="60" fill="#e53935" rx="5"/>
+  <text x="1045" y="470" text-anchor="middle" font-size="9" font-weight="bold" fill="white">Handshake</text>
+  <text x="1045" y="485" text-anchor="middle" font-size="8" fill="white">Interceptor</text>
+  <text x="1045" y="500" text-anchor="middle" font-size="8" fill="white">beforeHandshake()</text>
+  <text x="1045" y="513" text-anchor="middle" font-size="7" fill="white">JWT검증</text>
+  
+  <!-- JwtUtil for WebSocket -->
+  <rect x="1120" y="460" width="90" height="60" fill="#2196f3" rx="5"/>
+  <text x="1165" y="475" text-anchor="middle" font-size="10" font-weight="bold" fill="white">JwtUtil</text>
+  <text x="1165" y="485" text-anchor="middle" font-size="8" fill="white">validateToken()</text>
+  <text x="1165" y="500" text-anchor="middle" font-size="8" fill="white">동일한 유틸</text>
+  <text x="1165" y="513" text-anchor="middle" font-size="7" fill="white">HTTP와 공유</text>
+  
+  <!-- UserPrincipal for WebSocket -->
+  <rect x="1240" y="460" width="90" height="60" fill="#4caf50" rx="5"/>
+  <text x="1285" y="475" text-anchor="middle" font-size="10" font-weight="bold" fill="white">UserPrincipal</text>
+  <text x="1285" y="485" text-anchor="middle" font-size="8" fill="white">생성 및</text>
+  <text x="1285" y="500" text-anchor="middle" font-size="8" fill="white">Session</text>
+  <text x="1285" y="513" text-anchor="middle" font-size="7" fill="white">Attributes저장</text>
+  
+  <!-- STOMP Handler -->
+  <rect x="1360" y="460" width="90" height="60" fill="#ff9800" rx="5"/>
+  <text x="1405" y="475" text-anchor="middle" font-size="10" font-weight="bold" fill="white">STOMP</text>
+  <text x="1405" y="490" text-anchor="middle" font-size="9" fill="white">Handler</text>
+  <text x="1405" y="505" text-anchor="middle" font-size="8" fill="white">Protocol활성</text>
+  
+  <!-- WebSocket Security Flow Arrows -->
+  <path d="M 970 490 L 1000 490" stroke="#2e7d32" stroke-width="2" marker-end="url(#green-arrow)"/>
+  <path d="M 1090 490 L 1120 490" stroke="#2e7d32" stroke-width="2" marker-end="url(#green-arrow)"/>
+  <path d="M 1210 490 L 1240 490" stroke="#2e7d32" stroke-width="2" marker-end="url(#green-arrow)"/>
+  <path d="M 1330 490 L 1360 490" stroke="#2e7d32" stroke-width="2" marker-end="url(#green-arrow)"/>
+  
+  <!-- WebSocket Session Management -->
+  <rect x="880" y="540" width="190" height="50" fill="#795548" rx="5"/>
+  <text x="975" y="560" text-anchor="middle" font-size="11" font-weight="bold" fill="white">WebSocket Session Manager</text>
+  <text x="975" y="575" text-anchor="middle" font-size="9" fill="white">인증된 사용자 세션 생성</text>
+  
+  <!-- Redis Session Store -->
+  <rect x="1100" y="540" width="90" height="50" fill="#009688" rx="5"/>
+  <text x="1145" y="560" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Redis</text>
+  <text x="1145" y="575" text-anchor="middle" font-size="8" fill="white">Session Store</text>
+  
+  <!-- STOMP Subscription -->
+  <rect x="1220" y="540" width="90" height="50" fill="#673ab7" rx="5"/>
+  <text x="1265" y="560" text-anchor="middle" font-size="10" font-weight="bold" fill="white">채팅방</text>
+  <text x="1265" y="575" text-anchor="middle" font-size="8" fill="white">구독처리</text>
+  
+  <!-- WebSocket Session Flow -->
+  <path d="M 1285 520 L 975 540" stroke="#795548" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="3,3"/>
+  <path d="M 1070 565 L 1100 565" stroke="#009688" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 1190 565 L 1220 565" stroke="#673ab7" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Decision to WebSocket Branch -->
+  <path d="M 900 240 L 1175 350" stroke="#2e7d32" stroke-width="3" marker-end="url(#green-arrow)" stroke-dasharray="5,5"/>
+  <text x="1050" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">
+    WebSocket Upgrade (JWT in URL param or Header)
+  </text>
+  
+  <!-- WebSocket Security Process Steps -->
+  <text x="880" y="620" font-size="11" fill="#333">
+    <tspan x="880" dy="0">WebSocket Security 처리 상세 플로우:</tspan>
+    <tspan x="880" dy="18">1. HTTP Upgrade 요청 (JWT를 URL 파라미터 또는 헤더로 전송)</tspan>
+    <tspan x="880" dy="18">2. WebSocketConfig에서 설정한 HandshakeInterceptor 실행</tspan>
+    <tspan x="880" dy="18">3. HandshakeInterceptor.beforeHandshake() 메서드에서 JWT 추출</tspan>
+    <tspan x="880" dy="18">4. 동일한 JwtUtil.validateToken()으로 토큰 유효성 검증</tspan>
+    <tspan x="880" dy="18">5. 유효한 토큰이면 사용자 정보를 WebSocket Session attributes에 저장</tspan>
+    <tspan x="880" dy="18">6. WebSocket 연결 성공, STOMP 프로토콜 활성화</tspan>
+    <tspan x="880" dy="18">7. Redis에 세션 정보 저장 (다중 서버 지원)</tspan>
+    <tspan x="880" dy="18">8. 채팅방 구독 처리 (/topic/room/{roomId})</tspan>
+  </text>
+  
+  <!-- Unified Message Processing -->
+  <rect x="150" y="850" width="1300" height="300" fill="#f1f8e9" stroke="#388e3c" stroke-width="2" rx="10"/>
+  <text x="800" y="880" text-anchor="middle" font-size="16" font-weight="bold" fill="#388e3c">
+    💬 통합 메시지 처리 (WebSocket 연결 후 - 인증된 사용자만)
+  </text>
+  
+  <!-- Message Flow Components -->
+  <rect x="200" y="910" width="80" height="60" fill="#ff5722" rx="5"/>
+  <text x="240" y="930" text-anchor="middle" font-size="10" font-weight="bold" fill="white">발신자</text>
+  <text x="240" y="945" text-anchor="middle" font-size="9" fill="white">STOMP</text>
+  <text x="240" y="960" text-anchor="middle" font-size="8" fill="white">SEND</text>
+  
+  <rect x="320" y="910" width="80" height="60" fill="#673ab7" rx="5"/>
+  <text x="360" y="925" text-anchor="middle" font-size="9" font-weight="bold" fill="white">@Message</text>
+  <text x="360" y="940" text-anchor="middle" font-size="8" fill="white">Mapping</text>
+  <text x="360" y="955" text-anchor="middle" font-size="8" fill="white">Controller</text>
+  <text x="360" y="968" text-anchor="middle" font-size="7" fill="white">인증사용자확인</text>
+  
+  <rect x="440" y="910" width="80" height="60" fill="#2196f3" rx="5"/>
+  <text x="480" y="930" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Chat</text>
+  <text x="480" y="945" text-anchor="middle" font-size="9" fill="white">Service</text>
+  <text x="480" y="960" text-anchor="middle" font-size="8" fill="white">비즈니스로직</text>
+  
+  <rect x="560" y="910" width="80" height="60" fill="#4caf50" rx="5"/>
+  <text x="600" y="930" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Database</text>
+  <text x="600" y="945" text-anchor="middle" font-size="9" fill="white">Message</text>
+  <text x="600" y="960" text-anchor="middle" font-size="8" fill="white">영속화</text>
+  
+  <rect x="680" y="910" width="80" height="60" fill="#ff9800" rx="5"/>
+  <text x="720" y="925" text-anchor="middle" font-size="9" font-weight="bold" fill="white">Redis</text>
+  <text x="720" y="940" text-anchor="middle" font-size="8" fill="white">Pub/Sub</text>
+  <text x="720" y="955" text-anchor="middle" font-size="8" fill="white">클러스터</text>
+  <text x="720" y="968" text-anchor="middle" font-size="7" fill="white">메시지전파</text>
+  
+  <rect x="800" y="910" width="80" height="60" fill="#9c27b0" rx="5"/>
+  <text x="840" y="925" text-anchor="middle" font-size="9" font-weight="bold" fill="white">Message</text>
+  <text x="840" y="940" text-anchor="middle" font-size="8" fill="white">Listener</text>
+  <text x="840" y="955" text-anchor="middle" font-size="8" fill="white">@RedisListener</text>
+  
+  <rect x="920" y="910" width="80" height="60" fill="#607d8b" rx="5"/>
+  <text x="960" y="920" text-anchor="middle" font-size="9" font-weight="bold" fill="white">STOMP</text>
+  <text x="960" y="935" text-anchor="middle" font-size="8" fill="white">Template</text>
+  <text x="960" y="950" text-anchor="middle" font-size="8" fill="white">Broadcast</text>
+  <text x="960" y="963" text-anchor="middle" font-size="7" fill="white">/topic/room</text>
+  
+  <rect x="1040" y="910" width="80" height="60" fill="#ff5722" rx="5"/>
+  <text x="1080" y="930" text-anchor="middle" font-size="10" font-weight="bold" fill="white">수신자들</text>
+  <text x="1080" y="945" text-anchor="middle" font-size="9" fill="white">인증된</text>
+  <text x="1080" y="960" text-anchor="middle" font-size="8" fill="white">WebSocket</text>
+  
+  <rect x="1160" y="910" width="80" height="60" fill="#795548" rx="5"/>
+  <text x="1200" y="930" text-anchor="middle" font-size="10" font-weight="bold" fill="white">읽음확인</text>
+  <text x="1200" y="945" text

@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:8.0.25
+    container_name: chat-mysql
+    command: ["mysqld", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_general_ci"]
+    environment:
+      MYSQL_ROOT_PASSWORD: "1234"   # 루트 비번
+      MYSQL_DATABASE: "chat_dev"            
+      MYSQL_USER: "nbs_dev"                 
+      MYSQL_PASSWORD: "nbsdev1234"          
+      TZ: Asia/Seoul
+    ports:
+      - "3307:3306"          # 호스트 3307 → 컨테이너 3306
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./db/init:/docker-entrypoint-initdb.d
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pchange-root!"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: chat-backend
+    # env_file: .env   # ← 제거
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  frontend:
+    image: nginx:alpine
+    container_name: chat-frontend
+    depends_on:
+      - backend
+    ports:
+      - "8081:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+      - ./frontend/nginx.conf:/etc/nginx/nginx.conf:ro
+    restart: unless-stopped
+
+volumes:
+  dbdata:
