@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포트폴리오</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --background-color: #121212;
+            --form-background-color: #1e1e1e;
+            --primary-color: #007BFF;
+            --text-color: #e0e0e0;
+            --input-bg-color: #2a2a2a;
+            --input-border-color: #444;
+            --input-focus-border-color: var(--primary-color);
+            --button-text-color: #ffffff;
+            --error-color: #ff4d4d;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 0;
+            background-color: var(--background-color);
+        }
+        .profile-container {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            z-index: 1001;
+        }
+        .profile-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--input-bg-color);
+            border: 2px solid var(--input-border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .profile-image svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-color);
+        }
+        .username {
+            margin-left: 12px;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+            padding: 50px 20px;
+        }
+        #pdf-container {
+            width: 100%;
+            border: 1px solid var(--input-border-color);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            border-radius: 16px;
+            overflow: hidden; /* To ensure children respect the border-radius */
+        }
+        #pdf-container canvas {
+            width: 100% !important;
+            height: auto !important;
+            display: block;
+            /* Negative margin to collapse the space between canvases */
+            margin-bottom: -2px;
+        }
+        .chat-link-container {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 1000;
+        }
+        .chat-button {
+            display: flex; /* Use flex to center content */
+            align-items: center;
+            justify-content: center;
+            width: 80px; /* Circle size */
+            height: 80px; /* Circle size */
+            padding: 0;
+            font-size: 16px; /* Adjusted font size */
+            font-weight: 700;
+            color: var(--button-text-color);
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 50%; /* Make it a circle */
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+        }
+        .chat-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-image">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+        </div>
+        <span class="username">UserName</span>
+    </div>
+
+    <div class="container">
+        <div id="pdf-container"></div>
+    </div>
+    <div class="chat-link-container">
+        <a href="chat.html" class="chat-button">
+            채팅하기
+        </a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+        const url = 'resume.pdf';
+        const container = document.getElementById('pdf-container');
+
+        const renderPage = (pdf, pageNum) => {
+            return pdf.getPage(pageNum).then(page => {
+                const scale = 1.8;
+                const viewport = page.getViewport({ scale: scale });
+
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                // Remove margin from the last canvas to prevent container overflow
+                if (pageNum === pdf.numPages) {
+                    canvas.style.marginBottom = '0';
+                }
+
+                container.appendChild(canvas);
+
+                const renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                return page.render(renderContext).promise;
+            });
+        };
+
+        pdfjsLib.getDocument(url).promise.then(pdf => {
+            const numPages = pdf.numPages;
+            let promise = Promise.resolve();
+            for (let i = 1; i <= numPages; i++) {
+                promise = promise.then(() => renderPage(pdf, i));
+            }
+            return promise;
+        }).catch(err => {
+            console.error('Error while loading PDF: ' + err);
+        });
+    </script>
+</body>
+</html>

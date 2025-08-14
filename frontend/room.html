@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>채팅방</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/room.css">
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <button id="backButton" class="back-button">←</button>
+            <h1 id="roomNameHeader">채팅방 이름</h1>
+            <button id="logoutButton" class="logout-button">로그아웃</button>
+        </header>
+        <div class="messages-display" id="messagesDisplay">
+            <!-- 메시지들이 여기에 표시됩니다 -->
+        </div>
+        <div class="message-input-area">
+            <input type="text" id="messageInput" placeholder="메시지를 입력하세요...">
+            <button id="sendMessageButton" class="send-button">전송</button>
+        </div>
+    </div>
+
+    <script src="/js/room.js"></script>
+</body>
+</html>

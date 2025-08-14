@@ -1,0 +1,170 @@
+/* Inherit root variables from style.css implicitly or define them if not linked */
+/* Assuming style.css is linked first and defines the root variables */
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 600px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--form-background-color);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--primary-color);
+    color: var(--button-text-color);
+    border-bottom: 1px solid var(--primary-color-dark);
+    font-size: 1.2em; /* Slightly smaller than chat.html header */
+    font-weight: 700;
+}
+
+.chat-header h1 {
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.back-button {
+    padding: 8px 15px;
+    background-color: var(--primary-color-dark);
+    border: none;
+    border-radius: 8px;
+    color: var(--button-text-color);
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.back-button:hover {
+    background-color: var(--primary-color);
+}
+
+.logout-button {
+    padding: 8px 15px;
+    background-color: var(--primary-color-dark);
+    border: none;
+    border-radius: 8px;
+    color: var(--button-text-color);
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.logout-button:hover {
+    background-color: var(--primary-color);
+}
+
+.messages-display {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 15px;
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between messages */
+}
+
+/* Individual message styling */
+.message {
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 70%;
+    word-wrap: break-word;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.message.sent {
+    align-self: flex-end;
+    background-color: var(--primary-color);
+    color: var(--button-text-color);
+    border-bottom-right-radius: 5px; /* Tail effect */
+}
+
+.message.received {
+    align-self: flex-start;
+    background-color: var(--form-background-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-bottom-left-radius: 5px; /* Tail effect */
+}
+
+.message-input-area {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--form-background-color);
+}
+
+#messageInput {
+    flex-grow: 1;
+    padding: 12px 15px;
+    background-color: var(--input-bg-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: 25px; /* Rounded input field */
+    color: var(--text-color);
+    font-size: 1em;
+    margin-right: 10px;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+#messageInput:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+.send-button {
+    padding: 12px 20px;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 25px; /* Rounded button */
+    color: var(--button-text-color);
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.send-button:hover {
+    background-color: var(--primary-color-dark);
+}
+
+/* Scrollbar styling for messages-display */
+.messages-display::-webkit-scrollbar {
+    width: 8px;
+}
+
+.messages-display::-webkit-scrollbar-track {
+    background: var(--background-color);
+    border-radius: 10px;
+}
+
+.messages-display::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
+}
+
+.messages-display::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}

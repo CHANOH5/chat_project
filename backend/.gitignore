@@ -1,0 +1,31 @@
+# 빌드 산출물
+/build/
+/.gradle/
+/out/
+/bin/
+.gradle/
+build/
+!src/
+
+# 테스트 코드
+/src/test/
+
+# Gradle wrapper
+/gradle/
+/gradlew
+/gradlew.bat
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 로그
+*.log
+
+application.properties
+application.yml

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="hello-container">
+        <h1 class="hello-text">Hello</h1>
+    </div>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>로그인</h1>
+        </div>
+        <form id="loginForm" class="login-form" novalidate>
+            <div class="form-group">
+                <label for="id">아이디</label>
+                <input type="text" id="id" name="id" placeholder="아이디를 입력하세요" required>
+                <div class="error-message" id="idError"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
+                <div class="error-message" id="passwordError"></div>
+            </div>
+            <button type="submit" class="login-button">로그인</button>
+        </form>
+        <div class="signup-link">
+            <span>계정이 없으신가요?</span>
+            <a href="#" id="signupLink">회원가입</a>
+        </div>
+    </div>
+
+    <!-- 회원가입 모달 -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="login-header">
+                <h1>회원가입</h1>
+                <p>새로운 계정을 생성합니다.</p>
+            </div>
+            <form id="signupForm" class="login-form" novalidate>
+                <div class="form-group">
+                    <label for="signupId">아이디<span class="required">*</span></label>
+                    <input type="text" id="signupId" name="id" placeholder="아이디를 입력하세요" required>
+                    <div class="error-message" id="signupIdError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">비밀번호<span class="required">*</span></label>
+                    <input type="password" id="signupPassword" name="password" placeholder="비밀번호를 입력하세요" required>
+                    <div class="error-message" id="signupPasswordError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="name">이름<span class="required">*</span></label>
+                    <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+                    <div class="error-message" id="nameError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="nickname">닉네임<span class="required">*</span></label>
+                    <input type="text" id="nickname" name="nickname" placeholder="닉네임을 입력하세요" required>
+                    <div class="error-message" id="nicknameError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="email">이메일</label>
+                    <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" required>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="profileImage">프로필 이미지</label>
+                    <input type="file" id="profileImage" name="profileImage" class="file-input">
+                </div>
+                <button type="submit" class="login-button">회원가입</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/login.js"></script>
+
+</body>
+</html>

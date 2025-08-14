@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>채팅 목록</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/chat.css">
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1>채팅</h1>
+            <button id="logoutButton" class="logout-button">로그아웃</button>
+        </header>
+        <div class="chat-room-list">
+            <!-- 동적으로 채팅방 목록 추가 -->
+        </div>
+
+        <!-- New section for Admin Chat button -->
+        <!-- <div class="admin-chat-section">
+            <button id="createAdminChatButton" class="create-room-button">관리자와 1:1 채팅</button>
+        </div> -->
+
+        <div class="chat-room-footer">
+            <!-- Potentially empty or removed -->
+        </div>
+    </div>
+
+    <!-- 채팅방 생성 모달 -->
+    <div id="createRoomModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>새로운 채팅방 생성</h2>
+            <form id="createRoomForm">
+                <div class="form-group">
+                    <label for="roomName">채팅방 이름</label>
+                    <input type="text" id="roomName" required>
+                </div>
+                <button type="submit" class="login-button">생성</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/chat.js"></script>
+</body>
+</html>
