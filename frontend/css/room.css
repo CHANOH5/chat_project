@@ -13,6 +13,42 @@ body {
     overflow: hidden;
 }
 
+.room-container {
+    display: flex;
+    width: 80%;
+    height: 90vh;
+    max-width: 1200px;
+}
+
+.chat-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.participant-area {
+    width: 250px;
+    border-left: 1px solid var(--border-color);
+    padding: 20px;
+    background-color: var(--form-background-color);
+    overflow-y: auto;
+}
+
+.participant-area h2 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#participantList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#participantList li {
+    padding: 10px 0;
+}
+
 .chat-container {
     width: 100%;
     max-width: 600px;

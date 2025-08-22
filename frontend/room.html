@@ -8,21 +8,28 @@
     <link rel="stylesheet" href="/css/room.css">
 </head>
 <body>
-    <div class="chat-container">
-        <header class="chat-header">
-            <button id="backButton" class="back-button">←</button>
-            <h1 id="roomNameHeader">채팅방 이름</h1>
-            <button id="logoutButton" class="logout-button">로그아웃</button>
-        </header>
-        <div class="messages-display" id="messagesDisplay">
-            <!-- 메시지들이 여기에 표시됩니다 -->
+    <div id="header-container"></div>
+
+    <div class="room-container">
+        <div class="chat-area">
+            <div class="messages-display" id="messagesDisplay">
+                <!-- 메시지들이 여기에 표시됩니다 -->
+            </div>
+            <div class="message-input-area">
+                <input type="text" id="messageInput" placeholder="메시지를 입력하세요...">
+                <button id="sendMessageButton" class="send-button">전송</button>
+            </div>
         </div>
-        <div class="message-input-area">
-            <input type="text" id="messageInput" placeholder="메시지를 입력하세요...">
-            <button id="sendMessageButton" class="send-button">전송</button>
+        <div class="participant-area">
+            <h2>참가자 목록</h2>
+            <ul id="participantList"></ul>
         </div>
     </div>
 
+    <div id="footer-container"></div>
+
     <script src="/js/room.js"></script>
+    <script src="/js/layout.js"></script>
+    <script src="/js/session.js"></script>
 </body>
 </html>

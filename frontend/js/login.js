@@ -153,3 +153,28 @@ signupForm.addEventListener('submit', async (event) => {
         generalError.textContent = '회원가입 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
     }
 });
+
+const anonymousLoginButton = document.getElementById('anonymousLogin');
+anonymousLoginButton.addEventListener('click', async () => {
+    try {
+        const response = await fetch('http://localhost:8080/api/v1/login/anonymous', {
+            method: 'POST',
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('userId', data.userId);
+            localStorage.setItem('role', data.role);
+            localStorage.setItem('isAnonymous', data.isAnonymous);
+            localStorage.setItem('expiresAt', data.expiresAt);
+            window.location.href = 'intro.html';
+        } else {
+            const errorData = await response.json();
+            alert(errorData.message || '비회원 로그인에 실패했습니다.');
+        }
+    } catch (error) {
+        console.error('비회원 로그인 중 오류 발생:', error);
+        alert('비회원 로그인 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    }
+});

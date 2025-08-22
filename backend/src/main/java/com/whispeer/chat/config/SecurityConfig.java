@@ -43,8 +43,8 @@ public class SecurityConfig {
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))                               // JWT에서는 session 사용안함
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/error", "/api/v1/login", "/api/v1/join",                                // .requestMatchers().permitAll() 메서드로 해당 주소 요청은 Spring Security 적용하지 않음
-                                "/swagger-ui/**", "/v3/api-docs/**", "api/v1/ws/**").permitAll()
-                        .requestMatchers("/api/v1/**").authenticated()                                                        // .requestMatcers().authenticated() 메서드로 해당 주소 요청은 Spring Security 적용함
+                                "/swagger-ui/**", "/v3/api-docs/**", "api/v1/ws/**", "/api/v1/login/anonymous", "/api/v1/chat_room").permitAll()
+                        .requestMatchers("/api/v1/**", "/api/v1//private/admin").authenticated()                                                        // .requestMatcers().authenticated() 메서드로 해당 주소 요청은 Spring Security 적용함
                         .anyRequest().denyAll()                                                                                 // .requestMatchers()로 지정하ㅓ지 않은 모든 URL 패턴은 접근 거부함 - 인증 여부 상관없이 무조건 403 Forbidden 반환
                 )
                 .exceptionHandling(ex -> ex

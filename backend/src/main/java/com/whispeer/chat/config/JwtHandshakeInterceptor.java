@@ -27,11 +27,17 @@ public class JwtHandshakeInterceptor implements HandshakeInterceptor {
         String token = ((ServletServerHttpRequest) request).getServletRequest().getParameter("token");
 
         if (token != null && jwtUtil.validateToken(token)) {
+
             String userId = jwtUtil.getUserIdFromToken(token);
+
             attributes.put("userId", userId);                       // WebSocketSession에 사용자 정보 저장
+            attributes.put("isAnonymous", jwtUtil.isAnonymous(token));
+            attributes.put("expiration", jwtUtil.getExpiration(token));
+            System.out.println("[HS] OK userId=" + userId);
             return true;
         }
 
+        System.out.println("[HS] FAIL (invalid token)");
         return false; // 인증 실패 시 연결 거부
 
     }

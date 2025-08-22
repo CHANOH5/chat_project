@@ -31,9 +31,11 @@ public class ChatMessageDTO {
     } // constructor
 
     public void setContent(String s) {
+        this.content = s;
     }
 
     public String getSender() {
+        return this.senderId;
     }
 
 } // end class

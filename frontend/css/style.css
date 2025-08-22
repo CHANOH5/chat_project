@@ -211,3 +211,52 @@ body {
 .signup-link a:hover {
     text-decoration: underline;
 }
+
+.hidden {
+    display: none;
+}
+
+/* Layout */
+#header-container,
+#footer-container {
+    width: 100%;
+}
+
+.main-header {
+    background-color: var(--form-background-color);
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-title {
+    font-size: 1.5rem;
+}
+
+.header-user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.main-footer {
+    background-color: var(--form-background-color);
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    margin-top: auto; /* Push footer to the bottom */
+}
+
+/* Make body take full height */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
